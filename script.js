@@ -107,21 +107,25 @@ function renderGrid(size)
                         const greenValue = e.target.classList[2];
                         const blueValue = e.target.classList[3];
                 
-                        const r = 0;
-                        const g = 0;
-                        const b = 0;
+                        const r = parseInt(redValue.substring(1));
+                        const g = parseInt(greenValue.substring(1));
+                        const b = parseInt(blueValue.substring(1));
+
+                        console.log(r,g,b);
                         
                         const colorObj = darkenRGB(e.target.style.backgroundColor, r, g, b);
                 
                         console.log(colorObj);
 
+                        e.target.style.backgroundColor = colorObj.color;
+
                         e.target.classList.remove("r0");
                         e.target.classList.remove("g0");
                         e.target.classList.remove("b0");
                 
-                        e.target.classList.add(`r-${colorObj.r}`);
-                        e.target.classList.add(`g-${colorObj.g}`);
-                        e.target.classList.add(`b-${colorObj.b}`);
+                        e.target.classList.add(`r${colorObj.r}`);
+                        e.target.classList.add(`g${colorObj.g}`);
+                        e.target.classList.add(`b${colorObj.b}`);
                 }
                 
 
