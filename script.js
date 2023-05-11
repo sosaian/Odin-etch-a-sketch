@@ -47,12 +47,19 @@ function renderGrid(size)
     document.querySelector("body").appendChild(wrapper);
 }
 
+function resetGrid()
+{
+    const bodyElement = document.querySelector("body");
+    const wrapperElement = document.querySelector(".wrapper");
+    
+    bodyElement.removeChild(wrapperElement);
+}
+
 const resetButtonElement = document.querySelector("#resetButton");
 
 resetButtonElement.addEventListener("click", (e) =>
 {
-    console.log("hello");
-    //resetGrid();
-    //size = getGridSize();
-    //renderGrid(size);
+    resetGrid();
+    size = getGridSize();
+    renderGrid(size);
 });
