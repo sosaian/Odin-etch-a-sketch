@@ -23,6 +23,13 @@ body
     align-items: center;
 }
 
+button
+{
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
 div
 {
     padding: 0;

@@ -46,3 +46,13 @@ function renderGrid(size)
 
     document.querySelector("body").appendChild(wrapper);
 }
+
+const resetButtonElement = document.querySelector("#resetButton");
+
+resetButtonElement.addEventListener("click", (e) =>
+{
+    console.log("hello");
+    //resetGrid();
+    //size = getGridSize();
+    //renderGrid(size);
+});
