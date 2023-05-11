@@ -14,6 +14,17 @@ function getGridSize()
     return size;
 }
 
+function getRandomColorHex()
+{
+    //Generate a random integer between 0 and 16777215 (FFFFFF in hexadecimal)
+    const randomInt = Math.floor(Math.random() * 16777215);
+  
+    //Convert the integer to hexadecimal
+    const color = "#" + randomInt.toString(16);
+  
+    return color;
+  }
+
 function renderGrid(size)
 {
     console.log(size);
@@ -37,7 +48,7 @@ function renderGrid(size)
 
             tile.addEventListener("mouseover", (e) =>
             {
-                e.target.style.backgroundColor = "#f2f2f2";
+                e.target.style.backgroundColor = getRandomColorHex();
             });
 
             row.appendChild(tile);
