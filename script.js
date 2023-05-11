@@ -25,18 +25,46 @@ function getRandomRGB()
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-function darkenRGB(color)
+function extractRGB(rgbString)
 {
-    const factor = 0.9; // 10% darker
+    // Extract values of r, g, and b from RGB string
+    const matches = rgbString.match(/(\d+)/g);
+    const r = parseInt(matches[0]);
+    const g = parseInt(matches[1]);
+    const b = parseInt(matches[2]);
+  
+    // Return array containing r, g, and b values
+    return [r, g, b];
+}
+  
 
-    // Extract the individual R, G, B values from the string
-    const rgb = color.substring(4, color.length - 1).split(",");
-    const r = Math.floor(parseInt(rgb[0].trim()) * factor);
-    const g = Math.floor(parseInt(rgb[1].trim()) * factor);
-    const b = Math.floor(parseInt(rgb[2].trim()) * factor);
-    
-    // Return the new RGB color string
-    return `rgb(${r}, ${g}, ${b})`;
+function darkenRGB(color, r = 0, g = 0, b = 0)
+{
+    const rgbValues = extractRGB(color);
+
+    let originalR = rgbValues[0];
+    let originalG = rgbValues[1];
+    let originalB = rgbValues[2];
+
+    console.log(originalR, originalG, originalB);
+
+    if (r === 0 && g === 0 && b === 0)
+    {
+        r = Math.max(0, Math.floor(originalR * 0.1));
+        g = Math.max(0, Math.floor(originalG * 0.1));
+        b = Math.max(0, Math.floor(originalB * 0.1));
+    }
+
+    originalR -= r;
+    originalG -= g;
+    originalB -= b;
+
+    return {
+        color: `rgb(${originalR}, ${originalG}, ${originalB})`,
+        r: r,
+        g: g,
+        b: b
+    };
 }
 
 function renderGrid(size)
@@ -71,8 +99,12 @@ function renderGrid(size)
                 }
                 else
                 {
-                    e.target.style.backgroundColor = darkenRGB(e.target.style.backgroundColor);
+                    const colorObj = darkenRGB(e.target.style.backgroundColor);
+
+                    console.log(colorObj);
                 }
+
+                console.log(e.target.style.backgroundColor);
             });
 
             row.appendChild(tile);
