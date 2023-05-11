@@ -1,3 +1,24 @@
+// Get the <link> element that references the "style.css" stylesheet
+const link = document.querySelector("link[href='style.css']");
+
+// Get the stylesheet object associated with the <link> element
+const stylesheet = link.sheet;
+
+// Get an array of all CSS rules
+// const rules = stylesheet.cssRules;
+
+stylesheet.insertRule("div { padding: 0; margin: 0; display: flex; }", stylesheet.cssRules.length);
+
+stylesheet.insertRule(".wrapper { flex-direction: column; justify-content: center; align-items: center; width: 80vw; }", stylesheet.cssRules.length);
+
+stylesheet.insertRule(".row { flex-direction: row; }", stylesheet.cssRules.length);
+
+stylesheet.insertRule(".tile { border: 1px solid #f2f2f2; padding: 10px; }", stylesheet.cssRules.length);
+
+stylesheet.insertRule(".tile:hover { background-color: #f2f2f2; }", stylesheet.cssRules.length);
+
+// ************************************************************
+
 let size = 1;
 size = getGridSize();
 renderGrid(size);

@@ -21,36 +21,3 @@ body
     justify-content: center;
     align-items: center;
 }
-
-/* Everything below SHOULD BE ADDED WITH JS */
-
-div
-{
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-.wrapper
-{
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 80vw;
-}
-
-.row
-{
-    flex-direction: row;
-}
-
-.tile
-{
-    border: 1px solid #f2f2f2;
-    padding: 10px;
-}
-
-.tile:hover
-{
-    background-color: #f2f2f2;
-}
