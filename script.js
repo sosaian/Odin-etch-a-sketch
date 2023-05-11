@@ -25,6 +25,20 @@ function getRandomRGB()
     return `rgb(${r}, ${g}, ${b})`;
 }
 
+function darkenRGB(color)
+{
+    const factor = 0.9; // 10% darker
+
+    // Extract the individual R, G, B values from the string
+    const rgb = color.substring(4, color.length - 1).split(",");
+    const r = Math.floor(parseInt(rgb[0].trim()) * factor);
+    const g = Math.floor(parseInt(rgb[1].trim()) * factor);
+    const b = Math.floor(parseInt(rgb[2].trim()) * factor);
+    
+    // Return the new RGB color string
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 function renderGrid(size)
 {
     console.log(size);
@@ -43,12 +57,22 @@ function renderGrid(size)
         for (let tileNumber = 1; tileNumber < size + 1; tileNumber++)
         {
             const tile = document.createElement("div");
-            tile.classList.add("tile");
             tile.id = `tile${tileNumber}`;
+            tile.classList.add("tile");
+            
+            tile.classList.add("withoutColor");
 
             tile.addEventListener("mouseover", (e) =>
             {
+                if (tile.classList[1])
+                {
                     e.target.style.backgroundColor = getRandomRGB();
+                    tile.classList.remove("withoutColor");
+                }
+                else
+                {
+                    e.target.style.backgroundColor = darkenRGB(e.target.style.backgroundColor);
+                }
             });
 
             row.appendChild(tile);
