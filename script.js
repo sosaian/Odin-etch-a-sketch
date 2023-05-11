@@ -14,6 +14,59 @@ function getGridSize()
     return size;
 }
 
+function getRandomRGB()
+{
+    // Generate random values for each channel (0-255)
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    
+    // Return RGB color string
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+function extractRGB(rgbString)
+{
+    // Extract values of r, g, and b from RGB string
+    const matches = rgbString.match(/(\d+)/g);
+    const r = parseInt(matches[0]);
+    const g = parseInt(matches[1]);
+    const b = parseInt(matches[2]);
+  
+    // Return array containing r, g, and b values
+    return [r, g, b];
+}
+  
+
+function darkenRGB(color, r = 0, g = 0, b = 0)
+{
+    const rgbValues = extractRGB(color);
+
+    let originalR = rgbValues[0];
+    let originalG = rgbValues[1];
+    let originalB = rgbValues[2];
+
+    console.log(originalR, originalG, originalB);
+
+    if (r === 0 && g === 0 && b === 0)
+    {
+        r = Math.max(0, Math.floor(originalR * 0.1));
+        g = Math.max(0, Math.floor(originalG * 0.1));
+        b = Math.max(0, Math.floor(originalB * 0.1));
+    }
+
+    originalR -= r;
+    originalG -= g;
+    originalB -= b;
+
+    return {
+        color: `rgb(${originalR}, ${originalG}, ${originalB})`,
+        r: r,
+        g: g,
+        b: b
+    };
+}
+
 function renderGrid(size)
 {
     console.log(size);
@@ -32,12 +85,51 @@ function renderGrid(size)
         for (let tileNumber = 1; tileNumber < size + 1; tileNumber++)
         {
             const tile = document.createElement("div");
-            tile.classList.add("tile");
             tile.id = `tile${tileNumber}`;
+            tile.classList.add("tile");
+            
+            tile.classList.add("withoutColor");
 
             tile.addEventListener("mouseover", (e) =>
             {
-                e.target.style.backgroundColor = "#f2f2f2";
+                if (tile.classList.contains("withoutColor"))
+                {
+                        e.target.style.backgroundColor = getRandomRGB();
+                        tile.classList.remove("withoutColor");
+                
+                        e.target.classList.add("r0");
+                        e.target.classList.add("g0");
+                        e.target.classList.add("b0");
+                }
+                else
+                {
+                        const redValue = e.target.classList[1];
+                        const greenValue = e.target.classList[2];
+                        const blueValue = e.target.classList[3];
+                
+                        const r = parseInt(redValue.substring(1));
+                        const g = parseInt(greenValue.substring(1));
+                        const b = parseInt(blueValue.substring(1));
+
+                        console.log(r,g,b);
+                        
+                        const colorObj = darkenRGB(e.target.style.backgroundColor, r, g, b);
+                
+                        console.log(colorObj);
+
+                        e.target.style.backgroundColor = colorObj.color;
+
+                        e.target.classList.remove("r0");
+                        e.target.classList.remove("g0");
+                        e.target.classList.remove("b0");
+                
+                        e.target.classList.add(`r${colorObj.r}`);
+                        e.target.classList.add(`g${colorObj.g}`);
+                        e.target.classList.add(`b${colorObj.b}`);
+                }
+                
+
+                console.log(e.target.style.backgroundColor);
             });
 
             row.appendChild(tile);
