@@ -14,16 +14,16 @@ function getGridSize()
     return size;
 }
 
-function getRandomColorHex()
+function getRandomRGB()
 {
-    //Generate a random integer between 0 and 16777215 (FFFFFF in hexadecimal)
-    const randomInt = Math.floor(Math.random() * 16777215);
-  
-    //Convert the integer to hexadecimal
-    const color = "#" + randomInt.toString(16);
-  
-    return color;
-  }
+    // Generate random values for each channel (0-255)
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    
+    // Return RGB color string
+    return `rgb(${r}, ${g}, ${b})`;
+}
 
 function renderGrid(size)
 {
@@ -48,7 +48,7 @@ function renderGrid(size)
 
             tile.addEventListener("mouseover", (e) =>
             {
-                e.target.style.backgroundColor = getRandomColorHex();
+                    e.target.style.backgroundColor = getRandomRGB();
             });
 
             row.appendChild(tile);
