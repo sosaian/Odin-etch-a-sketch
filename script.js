@@ -82,9 +82,7 @@ function renderGrid(size)
         {
             const tile = document.createElement("div");
             tile.id = `tile${tileNumber}`;
-            tile.classList.add("tile");
-            
-            tile.classList.add("withoutColor");
+            tile.classList.add("tile", "withoutColor");
 
             tile.addEventListener("mouseover", (e) =>
             {
@@ -93,9 +91,7 @@ function renderGrid(size)
                         e.target.style.backgroundColor = getRandomRGB();
                         tile.classList.remove("withoutColor");
                 
-                        e.target.classList.add("r0");
-                        e.target.classList.add("g0");
-                        e.target.classList.add("b0");
+                        e.target.classList.add("r0", "g0", "b0");
                 }
                 else
                 {
@@ -111,13 +107,9 @@ function renderGrid(size)
 
                         e.target.style.backgroundColor = colorObj.color;
 
-                        e.target.classList.remove("r0");
-                        e.target.classList.remove("g0");
-                        e.target.classList.remove("b0");
+                        e.target.classList.remove("r0", "g0", "b0");
                 
-                        e.target.classList.add(`r${colorObj.r}`);
-                        e.target.classList.add(`g${colorObj.g}`);
-                        e.target.classList.add(`b${colorObj.b}`);
+                        e.target.classList.add(`r${colorObj.r}`, `g${colorObj.g}`, `b${colorObj.b}`);
                 }
             });
 
