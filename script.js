@@ -46,8 +46,6 @@ function darkenRGB(color, r = 0, g = 0, b = 0)
     let originalG = rgbValues[1];
     let originalB = rgbValues[2];
 
-    console.log(originalR, originalG, originalB);
-
     if (r === 0 && g === 0 && b === 0)
     {
         r = Math.max(0, Math.floor(originalR * 0.1));
@@ -69,8 +67,6 @@ function darkenRGB(color, r = 0, g = 0, b = 0)
 
 function renderGrid(size)
 {
-    console.log(size);
-
     const wrapper = document.createElement("div");
     wrapper.classList.add("wrapper");
 
@@ -110,12 +106,8 @@ function renderGrid(size)
                         const r = parseInt(redValue.substring(1));
                         const g = parseInt(greenValue.substring(1));
                         const b = parseInt(blueValue.substring(1));
-
-                        console.log(r,g,b);
                         
                         const colorObj = darkenRGB(e.target.style.backgroundColor, r, g, b);
-                
-                        console.log(colorObj);
 
                         e.target.style.backgroundColor = colorObj.color;
 
@@ -127,9 +119,6 @@ function renderGrid(size)
                         e.target.classList.add(`g${colorObj.g}`);
                         e.target.classList.add(`b${colorObj.b}`);
                 }
-                
-
-                console.log(e.target.style.backgroundColor);
             });
 
             row.appendChild(tile);
